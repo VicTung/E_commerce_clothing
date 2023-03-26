@@ -1,12 +1,15 @@
 import Button, { BaseButton, GoogleSignInButton, invertedButton } from "../button";
 import { useContext } from "react";
-import { CartContext } from "../../contexts/cartContext";
+// import { CartContext } from "../../contexts/cartContext";
 import CartItem from "../cartItem";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { selectCartItem } from "../../store/cart/cart.reducer";
 
 function CartDropdown() {
-	const { cartItems } = useContext(CartContext);
+	const cartItems = useSelector(selectCartItem)
+	// const { cartItems } = useContext(CartContext);
 	const navigation = useNavigate();
 
 	return (

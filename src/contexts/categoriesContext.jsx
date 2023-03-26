@@ -15,7 +15,6 @@ export const CategoriesProvider = ({ children }) => {
 			const reponse = await getCategoriesAndDocuments();
 			setCategoriesMap(reponse);
 		})();
-		// addCollectionAndDocuments("categories", SHOP_DATA);
 	}, []);
 
 	// add data to database

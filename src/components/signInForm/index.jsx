@@ -1,5 +1,7 @@
 import { useContext, useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { emailSignInStart, googleSignInStart } from "../../store/user/user.reducer";
 import { createUserDocumentFromAuth, signInAuthWithEmailAndPassword, signInWithGooglePopup } from "../../utils/firebase";
 import Button, { BUTTON_TYPE_CLASSES } from "../button";
 import FormInput from "../form-input";
@@ -10,11 +12,14 @@ const defaultFormFields = {
 };
 
 function SignInForm() {
+	const dispatch = useDispatch();
+
 	const [formFields, setFormFields] = useState(defaultFormFields);
 	const { email, password } = formFields;
 
 	async function signInWithGoogle() {
-		await signInWithGooglePopup();
+		dispatch(googleSignInStart());
+		// await signInWithGooglePopup();
 	}
 
 	function handleChange(e) {
@@ -27,7 +32,8 @@ function SignInForm() {
 	async function handleSubmiss(event) {
 		event.preventDefault();
 		try {
-			await signInAuthWithEmailAndPassword(email, password);
+			// await signInAuthWithEmailAndPassword(email, password);
+			dispatch(emailSignInStart(email, password));
 		} catch (error) {
 			if (error.code === "auth/wrong-password") {
 				alert("wrong password or email");

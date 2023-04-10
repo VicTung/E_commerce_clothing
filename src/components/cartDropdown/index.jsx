@@ -1,4 +1,4 @@
-import Button, { BaseButton, GoogleSignInButton, invertedButton } from "../button";
+import Button, { BaseButton, GoogleSignInButton, InvertedButton } from "../button";
 import { useContext } from "react";
 // import { CartContext } from "../../contexts/cartContext";
 import CartItem from "../cartItem";
@@ -44,7 +44,7 @@ const CartDropdownContainer = styled.div`
 
 	${BaseButton},
 	${GoogleSignInButton},
-	${invertedButton} {
+	${InvertedButton} {
 		margin-top: auto;
 	}
 `;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { SpinnerContainer } from "../spinner";
 // import "./styles.scss";
 
 export const BUTTON_TYPE_CLASSES = {
@@ -11,13 +12,17 @@ function getButton(buttonType = BUTTON_TYPE_CLASSES.base) {
 	return {
 		[BUTTON_TYPE_CLASSES.base]: BaseButton,
 		[BUTTON_TYPE_CLASSES.google]: GoogleSignInButton,
-		[BUTTON_TYPE_CLASSES.inverted]: invertedButton,
+		[BUTTON_TYPE_CLASSES.inverted]: InvertedButton,
 	}[buttonType];
 }
 
-const Button = ({ children, buttonType, ...otherProps }) => {
+const Button = ({ children, isLoading, buttonType, ...otherProps }) => {
 	const CustomButton = getButton(buttonType);
-	return <CustomButton {...otherProps}>{children}</CustomButton>;
+	return (
+		<CustomButton disabled={isLoading} {...otherProps}>
+			{isLoading ? <SpinnerButton /> : children}
+		</CustomButton>
+	);
 };
 
 export const BaseButton = styled.button`
@@ -37,6 +42,7 @@ export const BaseButton = styled.button`
 	cursor: pointer;
 	display: flex;
 	justify-content: center;
+	align-items: center;
 
 	&:hover {
 		background-color: white;
@@ -55,7 +61,7 @@ export const GoogleSignInButton = styled(BaseButton)`
 	}
 `;
 
-export const invertedButton = styled(BaseButton)`
+export const InvertedButton = styled(BaseButton)`
 	background-color: white;
 	color: black;
 	border: 1px solid black;
@@ -65,6 +71,11 @@ export const invertedButton = styled(BaseButton)`
 		color: white;
 		border: none;
 	}
+`;
+
+export const SpinnerButton = styled(SpinnerContainer)`
+	width: 30px;
+	height: 30px;
 `;
 
 export default Button;

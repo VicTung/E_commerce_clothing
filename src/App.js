@@ -13,7 +13,6 @@ import { createUserDocumentFromAuth, getCategoriesAndDocuments, getCurrentUser, 
 
 function App() {
 	const dispatch = useDispatch();
-	console.log('test evn', process.env)
 	useEffect(() => {
 		// const unsubcribe = onAuthStateChangedListener((user) => {
 		// 	if (user) createUserDocumentFromAuth(user);
